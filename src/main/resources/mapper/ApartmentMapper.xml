@@ -2,4 +2,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.admin.apartment.mapper.ApartmentMapper">
 
+    <!--  查询租户信息  -->
+    <select id="selectApartmentByInfo" parameterType="com.admin.apartment.entity.Apartment" resultType="com.admin.apartment.entity.Apartment">
+        select * from apartment
+        <where>
+            1=1
+            <if test="t.id != 0">
+                and id=#{t.id}
+            </if>
+            <if test="t.userid != 0">
+                and userid=#{t.userid}
+            </if>
+            <if test="t.house_type != null">
+                and house_type=#{t.houseType}
+            </if>
+            <if test="t.room_area != null">
+                and room_area=#{t.roomArea}
+            </if>
+            <if test="t.face != null">
+                and face=#{t.face}
+            </if>
+            <if test="t.price != null">
+                and price=#{t.price}
+            </if>
+            <if test="t.pattern != null">
+                and pattern=#{t.pattern}
+            </if>
+            <if test="t.address != null">
+                and address=#{t.address}
+            </if>
+            <if test="t.status != null">
+                and status=#{t.status}
+            </if>
+        </where>
+    </select>
+
+    <!--  模糊查询租户信息  -->
+    <select id="selectApartmentByLike" parameterType="com.admin.apartment.entity.Apartment" resultType="com.admin.apartment.entity.Apartment">
+        select * from apartment
+        <where>
+            1=1
+            <if test="t.userid != 0">
+                and userid = #{t.userid}
+            </if>
+            <if test="t.house_type != null">
+                and house_type = #{t.houseType}
+            </if>
+            <if test="t.roomAreaMin != null">
+                <![CDATA[and room_area >= #{t.roomAreaMin} ]]>
+            </if>
+            <if test="t.roomAreaMax != null">
+                <![CDATA[and room_area <= #{t.roomAreaMax} ]]>
+            </if>
+            <if test="t.face != null">
+                and face = #{t.face}
+            </if>
+            <if test="t.priceMin != null">
+                <![CDATA[and price >= #{t.priceMin} ]]>
+            </if>
+            <if test="t.priceMax != null">
+                <![CDATA[and price <= #{t.priceMax} ]]>
+            </if>
+            <if test="t.pattern != null">
+                and pattern like '%'||#{t.pattern}||'%'
+            </if>
+            <if test="t.address != null">
+                and address like '%'||#{t.address}||'%'
+            </if>
+            <if test="t.status != null">
+                and status like '%'||#{t.status}||'%'
+            </if>
+
+        </where>
+    </select>
+
 </mapper>

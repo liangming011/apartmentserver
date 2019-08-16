@@ -1,6 +1,7 @@
 package com.admin.apartment.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
@@ -51,11 +52,13 @@ public class User implements Serializable {
     /**
      * 证件类型
      */
+    @TableField(el = "id_type, jdbcType=VARCHAR")
     private String idType;
 
     /**
      * 居住状态
      */
+    @TableField(el = "is_live, jdbcType=VARCHAR")
     private String isLive;
 
 

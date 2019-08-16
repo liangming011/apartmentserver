@@ -36,7 +36,7 @@ public class UmsAdmin implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 13456908192834L;
 
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.UUID)
     private long id;
 
     private String username;

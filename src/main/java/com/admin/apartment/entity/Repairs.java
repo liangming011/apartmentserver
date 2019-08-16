@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -48,13 +49,38 @@ public class Repairs implements Serializable {
     private LocalDate createTime;
 
     /**
+     * 创建时间 时间段查询：开始时间
+     */
+    @TableField(exist = false)
+    private LocalDate createTimeBefore;
+
+    /**
+     * 创建时间 时间段查询：结束时间
+     */
+    @TableField(exist = false)
+    private LocalDate createTimeAfter;
+
+    /**
      * 处理时间
      */
     private LocalDate conductTime;
 
     /**
-     * 是否有文件
+     * 处理时间 时间段查询：开始时间
      */
+    @TableField(exist = false)
+    private LocalDate conductTimeBefore;
+
+    /**
+     * 处理时间 时间段查询：结束时间
+     */
+    @TableField(exist = false)
+    private LocalDate conductTimeAfter;
+
+    /**
+     * 是否有文件 0=>没有 1=>有
+     */
+    @TableField(el = "has_file, jdbcType=INTEGER")
     private Integer hasFile;
 
 

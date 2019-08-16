@@ -3,6 +3,7 @@ package com.admin.apartment.entity;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,17 +30,31 @@ public class Apartment implements Serializable {
     /**
      * 租户id
      */
-    private String userid;
+    private long userid;
 
     /**
      * 户型
      */
+    @TableField(el = "house_type, jdbcType=VARCHAR")
     private String houseType;
 
     /**
      * 房间面积
      */
+    @TableField(el = "room_area, jdbcType=VARCHAR")
     private String roomArea;
+
+    /**
+     * 房间面积 查询条件 最小值
+     */
+    @TableField(exist = false)
+    private String roomAreaMin;
+
+    /**
+     * 房间面积 查询条件 最大值
+     */
+    @TableField(exist = false)
+    private String roomAreaMax;
 
     /**
      * 朝向
@@ -50,6 +65,18 @@ public class Apartment implements Serializable {
      * 对外标价
      */
     private String price;
+
+    /**
+     * 对外标价 查询条件 最小值
+     */
+    @TableField(exist = false)
+    private String priceMin;
+
+    /**
+     * 对外标价 查询条件 最大值
+     */
+    @TableField(exist = false)
+    private String priceMax;
 
     /**
      * 支付模式（如押一付一）

@@ -3,6 +3,7 @@ package com.admin.apartment.entity;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,6 +30,7 @@ public class File implements Serializable {
     /**
      * 文件名字
      */
+    @TableField(el = "file_name, jdbcType=VARCHAR")
     private String fileName;
 
     /**
@@ -39,11 +41,13 @@ public class File implements Serializable {
     /**
      * 文件类型
      */
+    @TableField(el = "file_type, jdbcType=VARCHAR")
     private String fileType;
 
     /**
      * 所属表id
      */
+    @TableField(el = "belong_to, jdbcType=VARCHAR")
     private String belongTo;
 
 
