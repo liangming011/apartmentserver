@@ -28,7 +28,7 @@ public class UmsRole implements Serializable {
 
     private static final long serialVersionUID = 10883476571623L;
 
-    @TableId(value = "id", type = IdType.UUID)
+    @TableId(value = "id")
     private long id;
 
     /**

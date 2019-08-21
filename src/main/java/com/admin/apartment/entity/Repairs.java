@@ -25,7 +25,7 @@ public class Repairs implements Serializable {
 
     private static final long serialVersionUID = 18562374592L;
 
-    @TableId(value = "id", type = IdType.UUID)
+    @TableId(value = "id")
     private long id;
 
     /**
@@ -80,7 +80,6 @@ public class Repairs implements Serializable {
     /**
      * 是否有文件 0=>没有 1=>有
      */
-    @TableField(el = "has_file, jdbcType=INTEGER")
     private Integer hasFile;
 
 

@@ -2,9 +2,14 @@ package com.admin.apartment.mapper;
 
 import com.admin.apartment.entity.Apartment;
 import com.admin.apartment.entity.File;
+import com.admin.apartment.model.ApartmentParams;
+import com.admin.apartment.model.FiltersTag;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -19,11 +24,31 @@ public interface ApartmentMapper extends BaseMapper<Apartment> {
     /**
      * 查询文件信息
      * */
-    Page<Apartment> selectApartmentByInfo(IPage<Apartment> apartmentIPage);
+    Page<Apartment> selectApartmentByInfo(IPage<ApartmentParams> apartmentIPage);
 
     /**
      * 模糊查询文件信息
      * */
-    Page<Apartment> selectApartmentByLike(IPage<Apartment> apartmentIPage);
+    Page<Apartment> selectApartmentByLike(IPage<ApartmentParams> apartmentIPage);
+
+    /**
+     * 查询所有的支付模式
+     * */
+    List<String> selectPattern();
+
+    /**
+     * 查询所有的户型
+     * */
+    List<String> selectHouseType();
+
+    /**
+     * 查询所有的朝向
+     * */
+    List<String> selectFaceList();
+
+    /**
+     * 移除公寓中的租户信息设置为未出租
+     * */
+    int deleteUserInfoInApartmentById(@Param("id") String id);
 
 }

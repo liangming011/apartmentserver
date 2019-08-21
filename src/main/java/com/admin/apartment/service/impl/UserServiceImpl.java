@@ -1,7 +1,11 @@
 package com.admin.apartment.service.impl;
 
+import com.admin.apartment.entity.Apartment;
 import com.admin.apartment.entity.User;
 import com.admin.apartment.mapper.UserMapper;
+import com.admin.apartment.model.ApartmentParams;
+import com.admin.apartment.model.MyPage;
+import com.admin.apartment.model.UserParams;
 import com.admin.apartment.service.IUserService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -11,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.jws.soap.SOAPBinding;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,16 +32,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Autowired
     UserMapper userMapper;
 
-
-
     @Override
     public Page<User> selectUserByInfo(IPage<User> userIPage) {
         return userMapper.selectUserByInfo(userIPage);
     }
 
     @Override
-    public Page<User> selectUserByLike(IPage<User> userIPage) {
-        return userMapper.selectUserByLike(userIPage);
+    public Page<User> selectUserByLike(UserParams params) {
+        //当前页数，查询的最大个数
+        MyPage<UserParams> userIPage = new MyPage<>(params.getPage(),params.getLimit(),true);
+        userIPage.setT(params);
+        //获取所有数据 List
+        Page<User> page =  userMapper.selectUserByLike(userIPage);
+        return page;
     }
 
     @Override
@@ -53,4 +61,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public boolean deleteUserByInfo(List<String> ids) {
         return userMapper.deleteBatchIds(ids)>0;
     }
+
+    @Override
+    public User selectUserById(String userid) {
+        return userMapper.selectById(userid);
+    }
+
+    @Override
+    public List<User> selectUserByName(String username) {
+        return userMapper.selectUserByName(username);
+    }
+
+
 }

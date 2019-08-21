@@ -24,13 +24,12 @@ public class File implements Serializable {
 
     private static final long serialVersionUID = 184576987189L;
 
-    @TableId(value = "id", type = IdType.UUID)
+    @TableId(value = "id")
     private long id;
 
     /**
      * 文件名字
      */
-    @TableField(el = "file_name, jdbcType=VARCHAR")
     private String fileName;
 
     /**
@@ -41,13 +40,11 @@ public class File implements Serializable {
     /**
      * 文件类型
      */
-    @TableField(el = "file_type, jdbcType=VARCHAR")
     private String fileType;
 
     /**
      * 所属表id
      */
-    @TableField(el = "belong_to, jdbcType=VARCHAR")
     private String belongTo;
 
 

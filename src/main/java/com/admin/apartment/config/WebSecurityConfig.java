@@ -57,21 +57,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/apartment/login")// 对登录注册要允许匿名访问
+                .antMatchers("/apartment/login")
                 .permitAll()
-                .antMatchers("/")// 对登录注册要允许匿名访问
+                .antMatchers("/")
                 .permitAll()
-                .antMatchers("/apartment/userInfo")// 对登录注册要允许匿名访问
+                .antMatchers("/apartment/userInfo")
                 .permitAll()
-                .antMatchers("/apartment/logout")// 对登录注册要允许匿名访问
+                .antMatchers("/apartment/logout")
                 .permitAll()
-                .antMatchers("/apartment/checkUsername")// 对登录注册要允许匿名访问
+                .antMatchers("/apartment/checkUsername")
                 .permitAll()
-                .antMatchers(HttpMethod.OPTIONS)//跨域请求会先进行一次options请求
+                //跨域请求会先进行一次options请求
+                .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()
-//                .antMatchers("/**")//测试时全部运行访问
-//                .permitAll()
-                .anyRequest()// 除上面外的所有请求全部需要鉴权认证
+                //测试时全部运行访问
+                .antMatchers("/**")
+                .permitAll()
+                // 除上面外的所有请求全部需要鉴权认证
+                .anyRequest()
                 .authenticated();
         // 禁用缓存
         http.headers().cacheControl();

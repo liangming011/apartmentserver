@@ -1,6 +1,9 @@
 package com.admin.apartment.service;
 
+import com.admin.apartment.entity.Apartment;
 import com.admin.apartment.entity.User;
+import com.admin.apartment.model.ApartmentParams;
+import com.admin.apartment.model.UserParams;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -25,7 +28,7 @@ public interface IUserService extends IService<User> {
     /**
      * 模糊查询用户信息
      * */
-    Page<User> selectUserByLike(IPage<User> page);
+    Page<User> selectUserByLike(UserParams params);
 
     /**
      * 新增用户信息
@@ -41,5 +44,16 @@ public interface IUserService extends IService<User> {
      * 删除用户信息
      * */
     boolean deleteUserByInfo(List<String> ids);
+
+    /**
+     * 查询用户信息通过 id
+     * */
+    User selectUserById(String userid);
+
+    /**
+     * 查询用户信息通过 name
+     * */
+    List<User> selectUserByName(String username);
+
 
 }

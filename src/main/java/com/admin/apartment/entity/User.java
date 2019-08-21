@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -20,12 +21,13 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@NoArgsConstructor
 @TableName("apartment_user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1893578927L;
 
-    @TableId(value = "id", type = IdType.UUID)
+    @TableId(value = "id")
     private long id;
 
     /**
@@ -36,7 +38,7 @@ public class User implements Serializable {
     /**
      * 性别
      */
-    private String sex;
+    private int sex;
 
     /**
      * 电话
@@ -52,14 +54,14 @@ public class User implements Serializable {
     /**
      * 证件类型
      */
-    @TableField(el = "id_type, jdbcType=VARCHAR")
     private String idType;
 
     /**
      * 居住状态
      */
-    @TableField(el = "is_live, jdbcType=VARCHAR")
     private String isLive;
 
-
+    public User(String name) {
+        this.name = name;
+    }
 }

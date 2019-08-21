@@ -78,7 +78,6 @@ public class JwtTokenUtil {
      * 从token中获取登录用户名
      */
     public String getUserNameFromToken(String token) {
-        token = token.substring(this.tokenHead.length());
         String username;
         try {
             Claims claims = getClaimsFromToken(token);

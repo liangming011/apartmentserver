@@ -1,7 +1,10 @@
 package com.admin.apartment.mapper;
 
+import com.admin.apartment.entity.Apartment;
 import com.admin.apartment.entity.User;
+import com.admin.apartment.model.ApartmentParams;
 import com.admin.apartment.model.MyPage;
+import com.admin.apartment.model.UserParams;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -25,8 +28,19 @@ public interface UserMapper extends BaseMapper<User> {
     Page<User> selectUserByInfo(IPage<User> userIPage);
 
     /**
-     * 模糊查询租户信息
+     * 模糊查询文件信息
      * */
-    Page<User> selectUserByLike(IPage<User> userIPage);
+    Page<User> selectUserByLike(IPage<UserParams> userParamsIPage);
+
+    /**
+     * 模糊查询租户信息通过租户姓名
+     * */
+    List<User> selectUserByName(@Param("name") String username);
+
+    /**
+     * 通过 ID 更改租户的状态
+     * */
+    int updateUserStatusById(@Param("id") long id,@Param("status") int status);
+
 
 }
