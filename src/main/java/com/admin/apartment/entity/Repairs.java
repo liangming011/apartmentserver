@@ -2,6 +2,7 @@ package com.admin.apartment.entity;
 
 import java.time.LocalDate;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -31,7 +32,22 @@ public class Repairs implements Serializable {
     /**
      * 租户id
      */
-    private String userid;
+    private long userid;
+
+    /**
+     * 租户姓名
+     */
+    private String username;
+
+    /**
+     * 租户公寓id
+     */
+    private String apartmentid;
+
+    /**
+     * 租户公寓地址
+     */
+    private String apartmentAddress;
 
     /**
      * 报修状态
@@ -46,36 +62,14 @@ public class Repairs implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDate createTime;
-
-    /**
-     * 创建时间 时间段查询：开始时间
-     */
-    @TableField(exist = false)
-    private LocalDate createTimeBefore;
-
-    /**
-     * 创建时间 时间段查询：结束时间
-     */
-    @TableField(exist = false)
-    private LocalDate createTimeAfter;
+    @TableField(el = "conductTime, jdbcType=timestamp")
+    private LocalDateTime createtime;
 
     /**
      * 处理时间
      */
-    private LocalDate conductTime;
-
-    /**
-     * 处理时间 时间段查询：开始时间
-     */
-    @TableField(exist = false)
-    private LocalDate conductTimeBefore;
-
-    /**
-     * 处理时间 时间段查询：结束时间
-     */
-    @TableField(exist = false)
-    private LocalDate conductTimeAfter;
+    @TableField(el = "conductTime, jdbcType=timestamp", update="now()")
+    private LocalDateTime conductTime;
 
     /**
      * 是否有文件 0=>没有 1=>有

@@ -3,6 +3,7 @@ package com.admin.apartment.service;
 import com.admin.apartment.entity.Apartment;
 import com.admin.apartment.entity.User;
 import com.admin.apartment.model.ApartmentParams;
+import com.admin.apartment.model.FiltersTag;
 import com.admin.apartment.model.UserParams;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -43,7 +44,7 @@ public interface IUserService extends IService<User> {
     /**
      * 删除用户信息
      * */
-    boolean deleteUserByInfo(List<String> ids);
+    boolean deleteUserById(String id);
 
     /**
      * 查询用户信息通过 id
@@ -54,6 +55,11 @@ public interface IUserService extends IService<User> {
      * 查询用户信息通过 name
      * */
     List<User> selectUserByName(String username);
+
+    /**
+     * 获取全部的证件类型
+     * */
+    List<FiltersTag> selectIdTypeList();
 
 
 }

@@ -60,6 +60,16 @@ public interface IApartmentService extends IService<Apartment> {
      * */
     boolean deleteUserInfoInApartmentById(String id);
 
+    /**
+     * 通过租户 id 查询租户租用的公寓
+     * */
+    List<Apartment> getApartmentListByUserid(String userid);
+
+    /**
+     * 通过id 查询公寓
+     * */
+    Apartment getApartmentById(String id);
+
 
 
 }

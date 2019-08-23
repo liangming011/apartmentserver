@@ -42,5 +42,9 @@ public interface UserMapper extends BaseMapper<User> {
      * */
     int updateUserStatusById(@Param("id") long id,@Param("status") int status);
 
+    /**
+     * 获取全部的证件类型
+     * */
+    List<String> selectIdTypeList();
 
 }

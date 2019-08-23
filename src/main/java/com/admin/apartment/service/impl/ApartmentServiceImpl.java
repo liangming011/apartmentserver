@@ -115,6 +115,18 @@ public class ApartmentServiceImpl extends ServiceImpl<ApartmentMapper, Apartment
         return result;
     }
 
+    @Override
+    public List<Apartment> getApartmentListByUserid(String userid) {
+        List<Apartment> apartmentList = apartmentMapper.getApartmentListByUserid(userid);
+        return apartmentList;
+    }
+
+    @Override
+    public Apartment getApartmentById(String id) {
+        Apartment apartment = apartmentMapper.selectByApartmentId(id);
+        return apartment;
+    }
+
     /**
      * 公用静态方法
      * */

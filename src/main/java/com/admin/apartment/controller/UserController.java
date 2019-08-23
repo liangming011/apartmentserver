@@ -5,6 +5,7 @@ import com.admin.apartment.common.CommonResult;
 import com.admin.apartment.entity.Apartment;
 import com.admin.apartment.entity.User;
 import com.admin.apartment.model.ApartmentParams;
+import com.admin.apartment.model.FiltersTag;
 import com.admin.apartment.model.UserParams;
 import com.admin.apartment.service.IUserService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -61,6 +62,46 @@ public class UserController {
     CommonResult selectUserByName(@RequestBody String username){
         List<User> userList = iUserService.selectUserByName(username);
         return CommonResult.success(userList);
+    }
+
+    /**
+     * 查询租户所有证件类型
+     * */
+    @RequestMapping(value = "/selectIdTypeList",method = RequestMethod.GET)
+    public @ResponseBody
+    CommonResult selectIdTypeList(){
+        List<FiltersTag> idTypeList = iUserService.selectIdTypeList();
+        return CommonResult.success(idTypeList);
+    }
+
+    /**
+     * 更新租户信息
+     * */
+    @RequestMapping(value = "/updateUserById",method = RequestMethod.POST)
+    public @ResponseBody
+    CommonResult updateUserById(@RequestBody User user){
+        boolean result = iUserService.updateUserById(user);
+        return CommonResult.success(result);
+    }
+
+    /**
+     * 创建租户信息
+     * */
+    @RequestMapping(value = "/createUser",method = RequestMethod.POST)
+    public @ResponseBody
+    CommonResult createUser(@RequestBody User user){
+        boolean result = iUserService.insertUser(user);
+        return CommonResult.success(result);
+    }
+
+    /**
+     * 删除租户信息
+     * */
+    @RequestMapping(value = "/deleteUserById",method = RequestMethod.POST)
+    public @ResponseBody
+    CommonResult deleteUserById(@RequestBody String id){
+        boolean result = iUserService.deleteUserById(id);
+        return CommonResult.success(result);
     }
 
 

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,7 +22,7 @@ public class UserParams {
     /**
      * 性别
      */
-    private int sex;
+    private Set<Integer> sexSet;
 
     /**
      * 电话
@@ -36,12 +37,12 @@ public class UserParams {
     /**
      * 证件类型
      */
-    private List<String> idType;
+    private Set<String> idTypeSet;
 
     /**
      * 居住状态
      */
-    private String isLive;
+    private Set<Integer> isLiveSet;
 
     /**
      * 页数

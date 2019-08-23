@@ -4,6 +4,7 @@ import com.admin.apartment.entity.Apartment;
 import com.admin.apartment.entity.User;
 import com.admin.apartment.mapper.UserMapper;
 import com.admin.apartment.model.ApartmentParams;
+import com.admin.apartment.model.FiltersTag;
 import com.admin.apartment.model.MyPage;
 import com.admin.apartment.model.UserParams;
 import com.admin.apartment.service.IUserService;
@@ -58,8 +59,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public boolean deleteUserByInfo(List<String> ids) {
-        return userMapper.deleteBatchIds(ids)>0;
+    public boolean deleteUserById(String id) {
+        return userMapper.deleteById(id)>0;
     }
 
     @Override
@@ -72,5 +73,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return userMapper.selectUserByName(username);
     }
 
+    @Override
+    public List<FiltersTag> selectIdTypeList() {
+        List<String> list = userMapper.selectIdTypeList();
+        List<FiltersTag> tags = ApartmentServiceImpl.changeTagList(list);
+        return tags;
+    }
 
 }

@@ -13,36 +13,52 @@
             <if test="t.status != null">
                 and status=#{t.status}
             </if>
-            <if test="t.has_file != null">
-                and has_file=#{t.hasFile}
+            <if test="t.hasfile != null">
+                and hasfile=#{t.hasFile}
             </if>
+            order by createtime desc
         </where>
     </select>
 
     <!--  模糊查询报修表信息  -->
-    <select id="selectRepairsByLike" parameterType="com.admin.apartment.entity.Repairs" resultType="com.admin.apartment.entity.Repairs">
+    <select id="selectRepairsByLike" parameterType="com.admin.apartment.model.RepairsParams" resultType="com.admin.apartment.entity.Repairs">
         select * from repairs
         <where>
             1=1
-            <if test="t.status != null">
-                and status=#{t.status}
+            <if test="t.statusSet != null">
+                and status in
+                <foreach item="item" index="index" collection="t.statusSet"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
             </if>
-            <if test="t.has_file != null">
-                and has_file=#{t.hasFile}
+            <if test="t.username != null">
+                and username like '%${t.username}%'
+            </if>
+            <if test="t.hasfile != null">
+                and hasfile=#{t.hasFile}
             </if>
             <if test="t.createTimeBefore != null">
-                <![CDATA[and create_time <= #{t.createTimeBefore} ]]>
+                <![CDATA[and createtime >= date_format(#{t.createTimeBefore},'%Y-%m-%d %H:%i:%s') ]]>
+
             </if>
             <if test="t.createTimeAfter != null">
-                <![CDATA[and create_time >= #{t.createTimeAfter} ]]>
+                <![CDATA[and createtime <= date_format(#{t.createTimeAfter},'%Y-%m-%d %H:%i:%s') ]]>
             </if>
 
             <if test="t.conductTimeBefore != null">
-                <![CDATA[and conduct_time <= #{t.conductTimeBefore} ]]>
+                <![CDATA[and conductTime >= date_format(#{t.conductTimeBefore},'%Y-%m-%d %H:%i:%s') ]]>
             </if>
             <if test="t.conductTimeAfter != null">
-                <![CDATA[and conduct_time >= #{t.conductTimeAfter} ]]>
+                <![CDATA[and conductTime <= date_format(#{t.conductTimeAfter},'%Y-%m-%d %H:%i:%s') ]]>
             </if>
+            order by createtime desc
         </where>
     </select>
+
+    <!--  查询所有的修理类型  -->
+    <select id="selectStatusList" resultType="java.lang.String">
+        select distinct status from repairs
+    </select>
+
 </mapper>

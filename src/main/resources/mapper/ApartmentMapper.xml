@@ -112,9 +112,19 @@
         select distinct face from apartment
     </select>
 
+    <!--  通过 id 删除公寓中租户的信息  -->
     <update id="deleteUserInfoInApartmentById">
         update apartment set userid = null and status = 0
         where id=#{id}
     </update>
 
+    <!--  查询所有的公寓通过租户的 id  -->
+    <select id="getApartmentListByUserid" resultType="com.admin.apartment.entity.Apartment" parameterType="java.lang.String">
+        select * from apartment where userid=#{userid}
+    </select>
+
+    <!--  查询公寓通过id  -->
+    <select id="selectByApartmentId" resultType="com.admin.apartment.entity.Apartment" parameterType="java.lang.String">
+        select * from apartment where id=#{id}
+    </select>
 </mapper>

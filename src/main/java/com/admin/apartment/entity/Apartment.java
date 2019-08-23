@@ -71,7 +71,6 @@ public class Apartment implements Serializable {
     /**
      * 创建时间
      */
-    @TableField(el = "createtime, jdbcType=timestamp", update="now()")
     private LocalDateTime createtime;
 
 }

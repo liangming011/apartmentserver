@@ -26,7 +26,7 @@ import java.util.List;
  * @since 2019-08-15
  */
 @Controller
-@RequestMapping("/apartment")
+@RequestMapping("/apartment/apartment")
 public class ApartmentController {
 
     @Autowired
@@ -39,6 +39,16 @@ public class ApartmentController {
     public @ResponseBody
     CommonResult apartmentList(@RequestBody ApartmentParams params){
         Page<Apartment> apartmentList= iApartmentService.selectApartmentByLike(params);
+        return CommonResult.success(apartmentList);
+    }
+
+    /**
+     * 通过租户 id 查询租户租用的公寓
+     * */
+    @RequestMapping(value = "/getApartmentListByUserid",method = RequestMethod.POST)
+    public @ResponseBody
+    CommonResult getApartmentListByUserid(@RequestBody String userid){
+        List<Apartment> apartmentList= iApartmentService.getApartmentListByUserid(userid);
         return CommonResult.success(apartmentList);
     }
 
@@ -111,6 +121,17 @@ public class ApartmentController {
         boolean result = iApartmentService.deleteUserInfoInApartmentById(id);
         return CommonResult.success(result);
     }
+
+    /**
+     * 通过id 查询公寓
+     * */
+    @RequestMapping(value = "/getApartmentById",method = RequestMethod.POST)
+    public @ResponseBody
+    CommonResult getApartmentById(@RequestBody String id){
+        Apartment apartment= iApartmentService.getApartmentById(id);
+        return CommonResult.success(apartment);
+    }
+
 
 
 }

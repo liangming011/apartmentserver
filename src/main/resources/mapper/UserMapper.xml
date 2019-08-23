@@ -28,6 +28,7 @@
             <if test="t.isLive != null">
                 and isLive=#{t.isLive}
             </if>
+            order by createtime desc
         </where>
     </select>
 
@@ -50,8 +51,12 @@
             <if test="t.name != null">
                 and name like '%${t.name}%'
             </if>
-            <if test="t.sex != 0">
-                and sex=#{t.sex}
+            <if test="t.sexSet != null">
+                and sex in
+                <foreach item="item" index="index" collection="t.sexSet"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
             </if>
             <if test="t.phone != null">
                 and phone like '%${t.phone}%'
@@ -59,23 +64,32 @@
             <if test="t.idNumber != null">
                 and idNumber like '%${t.idNumber}%'
             </if>
-            <if test="t.idType != null">
+            <if test="t.idTypeSet != null">
                 and idType in
-                <foreach item="item" index="index" collection="t.idType"
+                <foreach item="item" index="index" collection="t.idTypeSet"
                          open="(" separator="," close=")">
                     #{item}
                 </foreach>
             </if>
-            <if test="t.isLive != null">
-                and isLive=#{t.isLive}
+            <if test="t.isLiveSet != null">
+                and isLive in
+                <foreach item="item" index="index" collection="t.isLiveSet"
+                                   open="(" separator="," close=")">
+                    #{item}
+                </foreach>
             </if>
+            order by createtime desc
         </where>
     </select>
-
+    <!--更新租户的状态为已入住或未入住-->
     <update id="updateUserStatusById">
         update apartment_user set status = #{status}
         where id=#{id}
     </update>
+<!--获取全部的证件类型-->
+    <select id="selectIdTypeList" resultType="java.lang.String">
+        select distinct idType from apartment_user
+    </select>
 
 
 </mapper>

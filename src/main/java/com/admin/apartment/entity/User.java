@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -59,7 +62,12 @@ public class User implements Serializable {
     /**
      * 居住状态
      */
-    private String isLive;
+    private int isLive;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createtime;
 
     public User(String name) {
         this.name = name;
